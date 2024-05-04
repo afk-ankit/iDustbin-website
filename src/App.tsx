@@ -31,7 +31,7 @@ function App() {
 
   if (!data) {
     return (
-      <div className="min-h-screen grid items-center bg-rich_black-300 text-white ">
+      <div className="min-h-screen grid items-center bg-rich_black-300 text-white px-4">
         <h1 className="text-xl text-center">
           Please wait while we fetch data from the server
         </h1>
