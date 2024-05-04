@@ -11,7 +11,7 @@ const Dustbin = ({ depth }: { depth: number }) => {
         <div
           className={`w-full transition-all ${
             depth <= dustbinHeight
-              ? "bg-skobeloff"
+              ? "bg-green-400"
               : depth <= 70
                 ? "bg-yellow-500"
                 : "bg-red_(cmyk)"
