@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { db } from "./utils/firebase";
 import { ref, onValue } from "firebase/database";
 import Dustbin from "./components/Dustbin";
+import { Trash2 } from "lucide-react";
 
 const distanceRef = ref(db, "/UsersData");
 
@@ -39,9 +40,17 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen p-4 flex flex-col justify-center bg-rich_black-300 text-white">
-      <Dustbin depth={depth} />
-    </div>
+    <>
+      <nav className="p-4">
+        <div className="flex gap-2 justify-center sm:justify-start">
+          <Trash2 />
+          <h1 className="text-white text-xl font-bold">iDustbin</h1>
+        </div>
+      </nav>
+      <div className="min-h-[90dvh] p-4 flex flex-col justify-center  text-white">
+        <Dustbin depth={depth} />
+      </div>
+    </>
   );
 }
 
