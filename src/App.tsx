@@ -3,6 +3,7 @@ import { db } from "./utils/firebase";
 import { ref, onValue } from "firebase/database";
 import Dustbin from "./components/Dustbin";
 import { Trash2 } from "lucide-react";
+import addNotification, { Notifications } from "react-push-notification";
 
 const distanceRef = ref(db, "/UsersData");
 
@@ -23,11 +24,28 @@ function App() {
       } else {
         const calculatedDepth =
           ((dustbinHeight - distance) / (dustbinHeight - 2)) * 100;
-        setDepth(calculatedDepth);
+        if (calculatedDepth > 95) {
+          setDepth(100);
+          return;
+        }
+        setDepth(Math.floor(calculatedDepth / 5) * 5);
       }
     });
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    if (depth > 75) {
+      addNotification({
+        title: "i Dustbin",
+        subtitle: "something",
+        message: "Dustbin is full please empty the dustbin",
+        duration: 4000,
+        native: true,
+        onClick: () => "Notification",
+      });
+    }
+  }, [depth]);
 
   if (data === null) {
     return (
@@ -42,6 +60,7 @@ function App() {
   return (
     <>
       <nav className="p-4">
+        <Notifications />
         <div className="flex gap-2 justify-center sm:justify-start">
           <Trash2 />
           <h1 className="text-white text-xl font-bold">iDustbin</h1>
