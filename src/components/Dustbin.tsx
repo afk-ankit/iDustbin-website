@@ -1,4 +1,4 @@
-const dustbinHeight = 20;
+const dustbinHeight = 19.38;
 const Dustbin = ({ depth }: { depth: number }) => {
   const customStyle = () => {
     return { height: `${depth}%` };
@@ -20,7 +20,11 @@ const Dustbin = ({ depth }: { depth: number }) => {
         ></div>
       </div>
       <h1 className="text-xl  text-center mt-8 font-roboto_serif">
-        Dustbin is {depth.toFixed(0)}% full{" "}
+        {depth == 0 ? (
+          "Dustbin is empty"
+        ) : (
+          <>Dustbin is {depth.toFixed(0)}% full</>
+        )}
       </h1>
       {depth > 70 && <h1 className="text-center">Please empty the dustbin</h1>}
     </>

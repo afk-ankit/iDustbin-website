@@ -6,10 +6,10 @@ import { Trash2 } from "lucide-react";
 
 const distanceRef = ref(db, "/UsersData");
 
-const dustbinHeight = 20;
+const dustbinHeight = 19.38;
 
 function App() {
-  const [data, setData] = useState(0);
+  const [data, setData] = useState(null);
   const [depth, setDepth] = useState(0);
   useEffect(() => {
     const unsubscribe = onValue(distanceRef, (snapshot) => {
@@ -18,18 +18,18 @@ function App() {
       setData(distance);
       if (distance > dustbinHeight && distance < 1200) {
         setDepth(0);
-      } else if (distance < 5 || distance > 1200) {
+      } else if (distance < 2 || distance > 1200) {
         setDepth(100);
       } else {
         const calculatedDepth =
-          ((dustbinHeight - distance) / (dustbinHeight - 5)) * 100;
+          ((dustbinHeight - distance) / (dustbinHeight - 2)) * 100;
         setDepth(calculatedDepth);
       }
     });
     return () => unsubscribe();
   }, []);
 
-  if (!data) {
+  if (data === null) {
     return (
       <div className="min-h-screen grid items-center bg-rich_black-300 text-white px-4">
         <h1 className="text-xl text-center">
